@@ -75,8 +75,16 @@ Thumbs.db
 temp/
 tmp/
 
-# Old project folders
+# Old project folders and archives
 movie-recommendation-app-by-facial-emotion-recognition/
-archive (5)/
+archive*/
 *.zip
+
+# Training outputs
+training_history.png
+*.h5
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+*.ipynb
 

@@ -141,8 +141,48 @@ The emotion detection model is a Convolutional Neural Network (CNN) with the fol
 
 ### Model Performance
 
-- **Validation Accuracy**: ~57%
+**Current Model:**
+- **Validation Accuracy**: ~57% (needs improvement)
 - **Dataset Size**: 28,000+ training images
+
+**Improved Model (Available):**
+- **Target Accuracy**: 70-75%+
+- **Method**: Transfer Learning with EfficientNetB0
+- **Training**: Run `python train_model.py`
+
+## 📈 Improving Model Performance
+
+The current model (~57% accuracy) needs improvement before production deployment. We've created an enhanced training script:
+
+### Quick Training
+
+```bash
+# Run improved training script
+python train_model.py
+```
+
+**Features:**
+- ✅ Transfer Learning (EfficientNetB0)
+- ✅ Class imbalance handling
+- ✅ Advanced data augmentation
+- ✅ Learning rate scheduling
+- ✅ Early stopping
+- ✅ Automatic best model saving
+
+**Expected Results:** 70-75%+ accuracy
+
+**Training Time:**
+- With GPU: 1-2 hours
+- With CPU: 4-6 hours
+
+### Compare Models
+
+```bash
+# Test old vs new model
+python compare_models.py
+```
+
+---
 
 ## 🛠️ Development
 
