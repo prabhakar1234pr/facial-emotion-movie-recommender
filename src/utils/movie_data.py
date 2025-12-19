@@ -1,0 +1,133 @@
+"""
+Movie Recommendations Data
+Handles movie recommendations based on emotions
+"""
+
+import random
+import json
+from pathlib import Path
+from typing import List, Dict
+
+# Movie recommendations mapped to emotions
+MOVIE_RECOMMENDATIONS = {
+    'anger': [
+        'Joker (2019)', '12 Angry Men (1957)', 'Falling Down (1993)', 
+        'American History X (1998)', 'The Revenant (2015)', 
+        'There Will Be Blood (2007)', 'Gladiator (2000)',
+        'Kill Bill: Volume 1 (2003)', 'Mad Max: Fury Road (2015)', 
+        'The Godfather Part II (1974)'
+    ],
+    'disgust': [
+        'Requiem for a Dream (2000)', 'Trainspotting (1996)', 
+        'The Fly (1986)', 'Se7en (1995)', 'A Clockwork Orange (1971)', 
+        'Oldboy (2003)', 'The Girl with the Dragon Tattoo (2011)',
+        'Mother! (2017)', 'Nightcrawler (2014)', 
+        'Silence of the Lambs (1991)'
+    ],
+    'fear': [
+        'The Exorcist (1973)', 'Hereditary (2018)', 'Get Out (2017)', 
+        'The Shining (1980)', 'It Follows (2014)', 'A Quiet Place (2018)', 
+        'Psycho (1960)', 'Alien (1979)', 'The Witch (2015)', 
+        'Midsommar (2019)'
+    ],
+    'happy': [
+        'Forrest Gump (1994)', 'The Pursuit of Happyness (2006)', 
+        'La La Land (2016)', 'Up (2009)', 'Amélie (2001)', 
+        'Little Miss Sunshine (2006)', 'The Grand Budapest Hotel (2014)',
+        "Singin' in the Rain (1952)", 'Paddington 2 (2017)', 
+        'Zootopia (2016)'
+    ],
+    'sad': [
+        "Schindler's List (1993)", 'Grave of the Fireflies (1988)', 
+        'Manchester by the Sea (2016)', 'The Green Mile (1999)', 
+        'Blue Valentine (2010)', 'Atonement (2007)',
+        'Brokeback Mountain (2005)', 'Marley & Me (2008)', 
+        'Coco (2017)', 'Up (2009)'
+    ],
+    'surprise': [
+        'The Sixth Sense (1999)', 'Inception (2010)', 'Shutter Island (2010)',
+        'The Prestige (2006)', 'Fight Club (1999)', 'The Usual Suspects (1995)',
+        'Gone Girl (2014)', 'Memento (2000)', 'The Others (2001)',
+        'Arrival (2016)'
+    ],
+    'neutral': [
+        'The Shawshank Redemption (1994)', 'Forrest Gump (1994)', 
+        'The Matrix (1999)', 'Interstellar (2014)', 'The Dark Knight (2008)',
+        'Pulp Fiction (1994)', 'The Lord of the Rings (2001)', 
+        'The Godfather (1972)', 'Inception (2010)', 'Goodfellas (1990)'
+    ]
+}
+
+
+def get_movie_recommendations(emotion: str, count: int = 1) -> List[str]:
+    """
+    Get movie recommendations based on emotion
+    
+    Args:
+        emotion (str): The detected emotion
+        count (int): Number of movies to recommend (default: 1)
+    
+    Returns:
+        List[str]: List of recommended movie titles
+    """
+    if emotion not in MOVIE_RECOMMENDATIONS:
+        emotion = 'neutral'  # Default fallback
+    
+    movies = MOVIE_RECOMMENDATIONS[emotion]
+    
+    # Return random sample
+    if count >= len(movies):
+        return movies
+    
+    return random.sample(movies, count)
+
+
+def get_all_recommendations() -> Dict[str, List[str]]:
+    """
+    Get all movie recommendations
+    
+    Returns:
+        Dict[str, List[str]]: Dictionary of emotion: movies mapping
+    """
+    return MOVIE_RECOMMENDATIONS.copy()
+
+
+def save_recommendations_to_json(file_path: str = None):
+    """
+    Save movie recommendations to JSON file
+    
+    Args:
+        file_path (str, optional): Path to save JSON file
+    """
+    if file_path is None:
+        file_path = Path(__file__).parent.parent.parent / "data" / "movie_recommendations.json"
+    
+    file_path = Path(file_path)
+    file_path.parent.mkdir(parents=True, exist_ok=True)
+    
+    with open(file_path, 'w', encoding='utf-8') as f:
+        json.dump(MOVIE_RECOMMENDATIONS, f, indent=2, ensure_ascii=False)
+    
+    print(f"Recommendations saved to: {file_path}")
+
+
+def load_recommendations_from_json(file_path: str) -> Dict[str, List[str]]:
+    """
+    Load movie recommendations from JSON file
+    
+    Args:
+        file_path (str): Path to JSON file
+    
+    Returns:
+        Dict[str, List[str]]: Dictionary of emotion: movies mapping
+    """
+    file_path = Path(file_path)
+    
+    if not file_path.exists():
+        raise FileNotFoundError(f"Recommendations file not found: {file_path}")
+    
+    with open(file_path, 'r', encoding='utf-8') as f:
+        recommendations = json.load(f)
+    
+    return recommendations
+
