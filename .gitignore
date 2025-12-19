@@ -75,3 +75,8 @@ Thumbs.db
 temp/
 tmp/
 
+# Old project folders
+movie-recommendation-app-by-facial-emotion-recognition/
+archive (5)/
+*.zip
+

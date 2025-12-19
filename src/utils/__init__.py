@@ -4,11 +4,15 @@ Utility functions package
 
 from .image_processing import preprocess_image, load_and_preprocess_image
 from .movie_data import get_movie_recommendations, MOVIE_RECOMMENDATIONS
+from .tmdb_api import TMDBClient
+from .llm_recommender import LLMRecommender
 
 __all__ = [
     'preprocess_image',
     'load_and_preprocess_image',
     'get_movie_recommendations',
-    'MOVIE_RECOMMENDATIONS'
+    'MOVIE_RECOMMENDATIONS',
+    'TMDBClient',
+    'LLMRecommender'
 ]
 

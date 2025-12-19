@@ -6,7 +6,10 @@ A deep learning-powered web application that detects emotions from facial expres
 
 - **Real-time Emotion Detection**: Uses a Convolutional Neural Network (CNN) to detect 7 different emotions
 - **Confidence Scores**: Shows probability distribution across all emotion categories
-- **Smart Movie Recommendations**: Curated movie lists mapped to each emotion
+- **TMDB Integration**: Rich movie data with posters, ratings, trailers, and descriptions
+- **AI-Powered Insights**: Personalized movie explanations using Groq LLM
+- **Beautiful UI**: Professional interface with movie posters and visual elements
+- **Smart Recommendations**: Emotion-to-genre mapping for accurate suggestions
 - **Modern Web Interface**: Built with Streamlit for a smooth user experience
 - **Modular Architecture**: Clean, maintainable code structure following best practices
 
@@ -64,8 +67,8 @@ Emotion-Detection-Deep-Learning/
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
-   cd "Emotion detection deep learning"
+   git clone https://github.com/prabhakar1234pr/facial-emotion-movie-recommender.git
+   cd facial-emotion-movie-recommender
    ```
 
 2. **Create a virtual environment** (recommended)
@@ -84,7 +87,19 @@ Emotion-Detection-Deep-Learning/
    pip install -r requirements.txt
    ```
 
-4. **Verify model file exists**
+4. **Set up API keys**
+   
+   Create a `.env` file in the root directory:
+   ```bash
+   TMDB_API_KEY=your_tmdb_api_key_here
+   GROQ_API_KEY=your_groq_api_key_here
+   ```
+   
+   **Get your API keys:**
+   - **TMDB**: Sign up at https://www.themoviedb.org/signup and get API key instantly
+   - **Groq**: Sign up at https://console.groq.com/ for free LLM API access
+
+5. **Verify model file exists**
    - Ensure `emotion_detection_model.keras` is in the `models/` directory
    - If not, you'll need to train the model first (see Training section)
 
@@ -100,8 +115,13 @@ The application will open in your default web browser at `http://localhost:8501`
 
 1. **Allow Camera Access**: Grant camera permissions when prompted by your browser
 2. **Take a Photo**: Click the camera button to capture your facial expression
-3. **View Results**: See your detected emotion with confidence scores
-4. **Get Recommendations**: Browse personalized movie suggestions based on your mood
+3. **View Results**: See your detected emotion with confidence scores and AI insights
+4. **Explore Movies**: Browse personalized movie recommendations with:
+   - High-quality posters
+   - Ratings and release dates
+   - Plot summaries
+   - AI-powered explanations for why each movie matches your mood
+   - Direct links to trailers
 
 ## 🧠 Model Architecture
 
@@ -143,8 +163,11 @@ The project follows a modular architecture with separation of concerns:
 
 ## 🔧 Configuration
 
-Edit `src/config/config.py` to modify:
+**Environment Variables (.env):**
+- `TMDB_API_KEY`: Your TMDB API key for movie data
+- `GROQ_API_KEY`: Your Groq API key for AI explanations
 
+**Application Settings (src/config/config.py):**
 - Model path and parameters
 - Emotion labels
 - Image processing settings
@@ -171,13 +194,15 @@ images/
 ## 🚧 Future Enhancements
 
 - [ ] Improve model accuracy with transfer learning
-- [ ] Integrate TMDb API for rich movie metadata
+- [x] Integrate TMDb API for rich movie metadata ✅
+- [x] Add AI-powered personalized recommendations ✅
 - [ ] Add user authentication and preference tracking
 - [ ] Implement emotion history tracking
 - [ ] Real-time video emotion detection
 - [ ] Multi-language support
 - [ ] Mobile app version
 - [ ] Docker deployment
+- [ ] Deploy to Hugging Face Spaces
 
 ## 🤝 Contributing
 

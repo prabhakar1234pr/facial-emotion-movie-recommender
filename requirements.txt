@@ -9,6 +9,11 @@ numpy==1.26.0
 # Web framework
 streamlit==1.41.0
 
+# API integrations
+requests>=2.31.0
+groq>=0.4.0
+python-dotenv>=1.0.0
+
 # Data handling
 pandas>=2.0.0
 
