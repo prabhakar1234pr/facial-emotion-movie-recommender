@@ -125,19 +125,28 @@ The application will open in your default web browser at `http://localhost:8501`
 
 ## 🧠 Model Architecture
 
-The emotion detection model is a Convolutional Neural Network (CNN) with the following architecture:
+**Production Model (Advanced):**
 
-- **Input**: 48x48 grayscale images
-- **Architecture**: 
-  - 3 Convolutional layers with MaxPooling
-  - Dropout layers for regularization
-  - Fully connected layers
-  - Softmax output for 7 emotion classes
-- **Training**: 
-  - Dataset: FER-2013 (Facial Expression Recognition)
-  - Data augmentation: rotation, shifts, flips
-  - Optimizer: Adam
-  - Loss: Categorical Crossentropy
+- **Input**: 48x48 RGB images (face-detected and cropped)
+- **Base Model**: EfficientNetB2/B3 (pre-trained on ImageNet)
+- **Custom Layers**:
+  - Dual pooling (Global Average + Global Max)
+  - Attention mechanism for feature focus
+  - Dense layers with L2 regularization
+  - Batch normalization and dropout
+  - 7-class softmax output
+- **Training Strategy**:
+  - Transfer learning with fine-tuning
+  - Face detection preprocessing
+  - Advanced data augmentation (8 types)
+  - Class-weighted loss for imbalance
+  - Learning rate scheduling
+  - Early stopping (patience=20)
+  - Comprehensive monitoring
+
+**Original Model (Baseline):**
+- Simple CNN with 57% accuracy
+- Included for comparison
 
 ### Model Performance
 

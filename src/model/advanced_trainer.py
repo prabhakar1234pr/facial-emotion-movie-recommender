@@ -54,7 +54,7 @@ class FaceDetector:
         self.eye_cascade = cv2.CascadeClassifier(
             cv2.data.haarcascades + 'haarcascade_eye.xml'
         )
-        print("✅ Face detector initialized")
+        print("[OK] Face detector initialized")
     
     def detect_and_crop(self, image, target_size=48):
         """
@@ -176,16 +176,16 @@ class AdvancedEmotionTrainer:
         self.history = None
         
         print("=" * 80)
-        print("🚀 ADVANCED EMOTION DETECTION TRAINING SYSTEM")
+        print(" ADVANCED EMOTION DETECTION TRAINING SYSTEM")
         print("=" * 80)
         print(f"Model: {model_type.upper()}")
         print("Features:")
-        print("  ✅ Face detection preprocessing")
-        print("  ✅ Transfer learning with attention")
-        print("  ✅ Advanced data augmentation")
-        print("  ✅ Class imbalance handling")
-        print("  ✅ Learning rate scheduling")
-        print("  ✅ Comprehensive monitoring")
+        print("  [OK] Face detection preprocessing")
+        print("  [OK] Transfer learning with attention")
+        print("  [OK] Advanced data augmentation")
+        print("  [OK] Class imbalance handling")
+        print("  [OK] Learning rate scheduling")
+        print("  [OK] Comprehensive monitoring")
         print(f"Target Accuracy: 75-80%+")
         print("=" * 80)
         
@@ -208,13 +208,13 @@ class AdvancedEmotionTrainer:
             emotion_folder = os.path.join(self.train_folder_path, emotion)
             
             if not os.path.exists(emotion_folder):
-                print(f"⚠️  Folder not found: {emotion_folder}")
+                print(f"[WARNING]  Folder not found: {emotion_folder}")
                 continue
             
             img_files = [f for f in os.listdir(emotion_folder) 
                         if f.endswith(('jpg', 'jpeg', 'png', 'gif'))]
             
-            print(f"\n📂 Processing {emotion}: {len(img_files)} images")
+            print(f"\n Processing {emotion}: {len(img_files)} images")
             
             for idx, img_name in enumerate(img_files):
                 if idx % 500 == 0:
@@ -241,9 +241,9 @@ class AdvancedEmotionTrainer:
                 except Exception as e:
                     continue
             
-            print(f"  Progress: {len(img_files)}/{len(img_files)} ✅")
+            print(f"  Progress: {len(img_files)}/{len(img_files)} [OK]")
         
-        print(f"\n📊 Preprocessing Summary:")
+        print(f"\n Preprocessing Summary:")
         print(f"  Total images: {len(images)}")
         print(f"  Faces detected: {face_detected_count} ({face_detected_count/len(images)*100:.1f}%)")
         
@@ -269,7 +269,7 @@ class AdvancedEmotionTrainer:
         
         # Convert to RGB for transfer learning
         images = np.stack([images] * 3, axis=-1)
-        print("✅ Converted to RGB format")
+        print("[OK] Converted to RGB format")
         
         # Encode labels
         label_to_index = {emotion: idx for idx, emotion in enumerate(self.emotions)}
@@ -283,7 +283,7 @@ class AdvancedEmotionTrainer:
         )
         self.class_weights = dict(enumerate(class_weights))
         
-        print("\n⚖️  Class Distribution & Weights:")
+        print("\n  Class Distribution & Weights:")
         for emotion, weight in zip(self.emotions, class_weights):
             count = np.sum(numeric_labels == label_to_index[emotion])
             print(f"  {emotion:10s}: {count:5d} images | Weight: {weight:.3f}")
@@ -299,7 +299,7 @@ class AdvancedEmotionTrainer:
             stratify=numeric_labels
         )
         
-        print(f"\n📊 Data Split:")
+        print(f"\n Data Split:")
         print(f"  Training:   {len(X_train):6d} samples ({len(X_train)/len(images)*100:.1f}%)")
         print(f"  Validation: {len(X_val):6d} samples ({len(X_val)/len(images)*100:.1f}%)")
         
@@ -321,14 +321,14 @@ class AdvancedEmotionTrainer:
         
         # Base model selection
         if self.model_type == 'efficientnetb3':
-            print("🏗️  Loading EfficientNetB3 (Better accuracy, slower)")
+            print("  Loading EfficientNetB3 (Better accuracy, slower)")
             base_model = EfficientNetB3(
                 include_top=False,
                 weights='imagenet',
                 input_tensor=input_layer
             )
         else:
-            print("🏗️  Loading EfficientNetB2 (Good balance)")
+            print("  Loading EfficientNetB2 (Good balance)")
             base_model = EfficientNetB2(
                 include_top=False,
                 weights='imagenet',
@@ -384,7 +384,7 @@ class AdvancedEmotionTrainer:
         total_params = model.count_params()
         trainable_params = sum([tf.size(w).numpy() for w in model.trainable_weights])
         
-        print(f"\n📊 Model Architecture:")
+        print(f"\n Model Architecture:")
         print(f"  Total parameters:     {total_params:,}")
         print(f"  Trainable parameters: {trainable_params:,}")
         print(f"  Non-trainable:        {total_params - trainable_params:,}")
@@ -479,7 +479,7 @@ class AdvancedEmotionTrainer:
         datagen = self.get_advanced_augmentation()
         datagen.fit(X_train)
         
-        print("\n🚀 Training started!")
+        print("\n Training started!")
         print("=" * 80)
         
         # Train
@@ -493,7 +493,7 @@ class AdvancedEmotionTrainer:
         )
         
         print("\n" + "=" * 80)
-        print("✅ Training completed!")
+        print("[OK] Training completed!")
         print("=" * 80)
         
         return self.history
@@ -521,13 +521,13 @@ class AdvancedEmotionTrainer:
         pred_classes = np.argmax(predictions, axis=1)
         true_classes = np.argmax(y_val, axis=1)
         
-        print("\n📊 OVERALL PERFORMANCE:")
+        print("\n OVERALL PERFORMANCE:")
         print("=" * 80)
         print(f"  Loss:         {val_loss:.4f}")
         print(f"  Accuracy:     {val_accuracy:.4f} ({val_accuracy*100:.2f}%)")
         print(f"  Top-2 Acc:    {top2_accuracy:.4f} ({top2_accuracy*100:.2f}%)")
         
-        print("\n📊 PER-CLASS ACCURACY:")
+        print("\n PER-CLASS ACCURACY:")
         print("=" * 80)
         for idx, emotion in enumerate(self.emotions):
             mask = true_classes == idx
@@ -537,18 +537,18 @@ class AdvancedEmotionTrainer:
                 print(f"  {emotion:10s}: {class_acc*100:5.2f}% ({count:4d} samples)")
         
         # Performance assessment
-        print("\n🎯 ASSESSMENT:")
+        print("\n ASSESSMENT:")
         print("=" * 80)
         if val_accuracy >= 0.80:
-            print("  🎉 OUTSTANDING! Ready for production deployment!")
+            print("   OUTSTANDING! Ready for production deployment!")
         elif val_accuracy >= 0.75:
-            print("  ✅ EXCELLENT! Exceeds target, ready for deployment!")
+            print("  [OK] EXCELLENT! Exceeds target, ready for deployment!")
         elif val_accuracy >= 0.70:
-            print("  ✅ GOOD! Meets target accuracy for deployment!")
+            print("  [OK] GOOD! Meets target accuracy for deployment!")
         elif val_accuracy >= 0.65:
-            print("  ⚠️  ACCEPTABLE but consider longer training")
+            print("  [WARNING]  ACCEPTABLE but consider longer training")
         else:
-            print("  ⚠️  NEEDS IMPROVEMENT - Check data quality")
+            print("  [WARNING]  NEEDS IMPROVEMENT - Check data quality")
         
         print("=" * 80)
         
@@ -582,8 +582,8 @@ class AdvancedEmotionTrainer:
         with open('training_metrics.json', 'w') as f:
             json.dump(metrics, f, indent=2)
         
-        print("✅ Saved training_history.png")
-        print("✅ Saved training_metrics.json")
+        print("[OK] Saved training_history.png")
+        print("[OK] Saved training_metrics.json")
         print("=" * 80)
     
     def _plot_training_history(self):
@@ -662,13 +662,11 @@ def main():
     print("Portfolio & Resume Grade System")
     print("=" * 80)
     
-    # Model selection
-    print("\nSelect model (higher number = better accuracy but slower):")
-    print("1. EfficientNetB2 (Recommended - Good balance)")
-    print("2. EfficientNetB3 (Best accuracy, slower training)")
+    # Model selection - using default for automated training
+    print("\nUsing EfficientNetB2 (Recommended - Good balance)")
+    print("For EfficientNetB3, edit advanced_trainer.py and change model_type")
     
-    choice = input("\nEnter choice (1 or 2) [default: 1]: ").strip() or "1"
-    model_type = 'efficientnetb3' if choice == "2" else 'efficientnetb2'
+    model_type = 'efficientnetb2'  # Default to B2 for good balance
     
     # Initialize trainer
     trainer = AdvancedEmotionTrainer(model_type=model_type)
@@ -677,7 +675,7 @@ def main():
     images, labels = trainer.load_and_preprocess_images()
     
     if len(images) == 0:
-        raise ValueError("❌ No images found! Check your data path.")
+        raise ValueError("[ERROR] No images found! Check your data path.")
     
     # Preprocess
     X_train, X_val, y_train, y_val = trainer.preprocess_data(images, labels)
@@ -692,15 +690,15 @@ def main():
     trainer.save_training_report()
     
     print("\n" + "=" * 80)
-    print("🎉 TRAINING COMPLETE!")
+    print(" TRAINING COMPLETE!")
     print("=" * 80)
-    print(f"\n✅ Best model saved: models/best_emotion_model.keras")
-    print(f"✅ Training plots: training_history.png")
-    print(f"✅ Metrics report: training_metrics.json")
-    print(f"\n🎯 Final Accuracy: {metrics['accuracy']*100:.2f}%")
+    print(f"\n[OK] Best model saved: models/best_emotion_model.keras")
+    print(f"[OK] Training plots: training_history.png")
+    print(f"[OK] Metrics report: training_metrics.json")
+    print(f"\n Final Accuracy: {metrics['accuracy']*100:.2f}%")
     
     if metrics['accuracy'] >= 0.75:
-        print("\n🚀 YOUR MODEL IS READY FOR DEPLOYMENT!")
+        print("\n YOUR MODEL IS READY FOR DEPLOYMENT!")
         print("\nNext steps:")
         print("1. Test locally: streamlit run app.py")
         print("2. Deploy to Hugging Face Spaces")

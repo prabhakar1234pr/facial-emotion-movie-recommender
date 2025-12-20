@@ -10,23 +10,23 @@ from src.model.advanced_trainer import main
 
 if __name__ == "__main__":
     print("""
-╔══════════════════════════════════════════════════════════════╗
-║   ADVANCED EMOTION DETECTION TRAINING                        ║
-║   Portfolio-Grade Model Development                          ║
-╚══════════════════════════════════════════════════════════════╝
+==================================================================
+   ADVANCED EMOTION DETECTION TRAINING
+   Portfolio-Grade Model Development
+==================================================================
 
 Features:
-  ✅ Face detection preprocessing
-  ✅ EfficientNetB2/B3 with attention mechanism
-  ✅ Advanced data augmentation
-  ✅ Class imbalance handling
-  ✅ Comprehensive monitoring
+  - Face detection preprocessing
+  - EfficientNetB2/B3 with attention mechanism
+  - Advanced data augmentation
+  - Class imbalance handling
+  - Comprehensive monitoring
   
 Target: 75-80%+ validation accuracy
 Time: 2-4 hours (depends on hardware)
     """)
     
-    input("Press Enter to start training...")
+    print("\nStarting training...")
     print()
     
     main()
