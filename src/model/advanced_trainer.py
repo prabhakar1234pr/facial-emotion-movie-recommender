@@ -204,8 +204,21 @@ class AdvancedEmotionTrainer:
         labels = []
         face_detected_count = 0
         
+        # Map emotion names to folder names (handle both 'anger' and 'angry')
+        emotion_folder_map = {
+            'anger': 'angry',
+            'disgust': 'disgust', 
+            'fear': 'fear',
+            'happy': 'happy',
+            'sad': 'sad',
+            'surprise': 'surprise',
+            'neutral': 'neutral'
+        }
+        
         for emotion in self.emotions:
-            emotion_folder = os.path.join(self.train_folder_path, emotion)
+            # Use mapped folder name
+            folder_name = emotion_folder_map.get(emotion, emotion)
+            emotion_folder = os.path.join(self.train_folder_path, folder_name)
             
             if not os.path.exists(emotion_folder):
                 print(f"[WARNING]  Folder not found: {emotion_folder}")
@@ -348,8 +361,11 @@ class AdvancedEmotionTrainer:
         # Combine pooling
         combined = Concatenate()([gap, gmp])
         
-        # Attention mechanism
-        attention = Dense(512, activation='sigmoid', name='attention_gate')(combined)
+        # Get the combined features size dynamically
+        combined_size = combined.shape[-1]
+        
+        # Attention mechanism - match the combined size
+        attention = Dense(combined_size, activation='sigmoid', name='attention_gate')(combined)
         x = Multiply()([combined, attention])
         
         # Dense layers with regularization
